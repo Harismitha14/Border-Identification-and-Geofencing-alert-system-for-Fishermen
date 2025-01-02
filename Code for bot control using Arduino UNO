@@ -1,0 +1,77 @@
+#include <SoftwareSerial.h>
+#include <Wire.h>
+
+#define ena 5
+#define enb 6
+#define IN1 13
+#define IN2 12
+#define IN3 8
+#define IN4 9
+#define buzzer 4
+
+SoftwareSerial mySerial(10, 11);
+
+void setup() {
+  mySerial.begin(115200);
+  Serial.begin(115200);
+  pinMode(ena, OUTPUT);
+  pinMode(enb, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+  pinMode(buzzer,OUTPUT);
+  
+}
+
+void loop() {
+  String incomingByte = mySerial.readString();
+  if (incomingByte.length() > 0) {
+    Serial.print("Received from ESP32: ");
+    Serial.println(incomingByte);
+    int val = incomingByte.toInt();
+    if (val ==0) {
+      
+      forward01();
+      Serial.print("Forward01");
+      delay(2000);
+      digitalWrite(buzzer,HIGH);
+      delay(500);
+      digitalWrite(buzzer,LOW);
+    } else if (val ==1) {
+      forward02();
+      delay(2000);
+      digitalWrite(buzzer,HIGH);
+      delay(1000);
+      digitalWrite(buzzer,LOW);
+    } 
+  }
+}
+
+void forward01(){
+  analogWrite(ena,180);
+  analogWrite(enb,180);
+  digitalWrite(IN1, LOW);  // Left motor forward
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);  // Right motor forward
+  digitalWrite(IN4, HIGH);
+  
+}
+
+void forward02(){
+  analogWrite(ena,120);
+  analogWrite(enb,120);
+  digitalWrite(IN1, LOW);  // Left motor forward
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);  // Right motor forward
+  digitalWrite(IN4, HIGH);
+  Serial.print("Forward02");
+}
+
+void stopMotors() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  Serial.println("Motors stopped.");
+}
