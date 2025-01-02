@@ -1,7 +1,7 @@
 # Border-Identification-and-Geofencing-alert-system-for-Fishermen
 The system navigates autonomously and alerts fishermen when approaching maritime border &amp; when border is crossed through Buzzer &amp; Telegram notification.
 
-//Code for obtaining GPS co-ordinates and HC-05 Bluetooth module communication
+//Code for obtaining GPS co-ordinates and communication with Arduino UNO through HC-05 Bluetooth module
 
 #include <TinyGPS++.h>
 #include <WiFi.h>
