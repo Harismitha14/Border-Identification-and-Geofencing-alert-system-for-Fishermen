@@ -2,6 +2,7 @@
 The system navigates autonomously and alerts fishermen when approaching maritime border &amp; when border is crossed through Buzzer &amp; Telegram notification.
 
 //Code for obtaining GPS co-ordinates and HC-05 Bluetooth module communication
+
 #include <TinyGPS++.h>
 #include <WiFi.h>
 #include <WiFiClientSecure.h>
